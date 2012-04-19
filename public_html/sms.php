@@ -3,7 +3,8 @@
 $time = time();
 
 if($_POST['Body'] != NULL){
-  $body = htmlentities($_POST['Body']);
+  $body = strip_tags($_POST['Body']);
+  $body = htmlentities($body);
   mysql_real_escape_string($body);
 		      
   $towrite = $body.'|'.time();
