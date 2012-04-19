@@ -1,0 +1,12 @@
+<?php
+
+$time = time();
+
+if($_POST['Body'] != NULL){
+  $towrite = $_POST['Body'].'|'.time();
+  $file = fopen("../file.txt", "w");
+  fwrite($file, $towrite);
+}
+
+
+?>

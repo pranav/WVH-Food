@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Is there food in West Village H?</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      function reloadJSON(){
+        $.getJSON('/api.php',
+          function(data){            
+            if(data.recent == "true")
+              $("#answer").html("<span style='color:green'>YES. LOCATION: "+data.room+".</span>");
+            else
+              $("#answer").html("<span style='color:red'>NOPE.</span>"); 
+          }
+        );
+      }
+      reloadJSON();
+      setInterval(reloadJSON, 1000);
+    });
+  </script>
+  <style type="text/css">
+    .hero-unit {
+      text-align:center;
+    }
+  </style>
+</head>
+<div class="container">
+  <div class="row">
+    <div class="hero-unit">
+      <h1>Is there food in WVH?</h1>
+      <p>Probably</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="hero-unit">
+      <h1 id="answer"></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span3">
+      <h1>What is this?</h1>
+      <p>This is a little service I created to notify users when there is free food available in WVH.</p>
+    </div>
+    <div class="span3">
+      <h1>How do I use?</h1>
+      <p>Just text (617) 544-3984 the location of where the free food is, the app will take care of the rest</p>
+    </div>
+  </div>
+</div>
+<body>
+</body>
+</html>
