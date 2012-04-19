@@ -10,10 +10,14 @@
       function reloadJSON(){
         $.getJSON('/api.php',
           function(data){            
-            if(data.recent == "true")
-              $("#answer").html("<span style='color:green'>YES. LOCATION: "+data.room+".</span>");
-            else
-              $("#answer").html("<span style='color:red'>NOPE.</span>"); 
+            if(data.recent == "true"){
+              $("#answer").text("YES. LOCATION: "+data.room+".");
+              $("#answer").css("color", "green");
+            }
+            else {
+              $("#answer").text("NOPE."); 
+              $("#answer").css("color", "red");
+            }
           }
         );
       }
@@ -46,7 +50,7 @@
     </div>
     <div class="span4">
       <h1>How do I use?</h1>
-      <p>Just text (617) 544-3984 the location of where the free food is, the app will take care of the rest.</p>
+      <p>Just text <strong>(617) 544-3984</strong> the location of where the free food is, the app will take care of the rest.</p>
     </div>
     <div class="span4">
       <h1>Accuracy rate?</h1>
