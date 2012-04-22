@@ -7,16 +7,25 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
+      function getTime(time){
+        var t = Math.round(+new Date()/1000);
+        var diff = t - time;        
+        return Math.round(diff/60);
+    
+      }
+
       function reloadJSON(){
-        $.getJSON('/api.php',
+        $.getJSON('/api.php?getlatest',
           function(data){            
             if(data.recent == "true"){
-              $("#answer").text("YES. LOCATION: "+data.room+".");
+              $("#answer").text(data.room);
               $("#answer").css("color", "green");
+              $(".posted").text("posted "+getTime(parseInt(data.time))+" minutes ago");
             }
             else {
               $("#answer").text("NOPE."); 
               $("#answer").css("color", "red");
+              $(".posted").text("");
             }
           }
         );
@@ -41,6 +50,7 @@
   <div class="row">
     <div class="hero-unit">
       <h1 id="answer"></h1>
+      <p class="posted"></p>
     </div>
   </div>
   <div class="row">
