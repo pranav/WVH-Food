@@ -6,7 +6,21 @@ if(isset($_GET['getlatest'])){
   $q = query("SELECT * FROM texts ORDER BY timestamp DESC LIMIT 1");
   $row = $q->fetch_assoc();
   $recent = "false";
+  $name = "";
+  $hasName = "false";
   if((time() - $row['timestamp']) < 3600) $recent = "true";
-  echo "{\"room\":\"{$row['text']}\", \"recent\":\"$recent\", \"time\":\"{$row['timestamp']}\"}";
+  if(name_exists($row['number'])){ 
+    $name = get_name($row['number']);
+    $hasName = "true";
+  }
+  echo <<<json
+    {
+      "room":"{$row['text']}",
+      "recent":"$recent",
+      "time":"{$row['timestamp']}", 
+      "hasName":"$hasName",
+      "name":"$name"
+    }  
+json;
 }
 ?>

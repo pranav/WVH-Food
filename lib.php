@@ -22,20 +22,20 @@ function query($sql){
 function sanitize($text){
   $body = trim($text);
   $body = strip_tags($body);
-  $mysqli = connect();
-  $mysqli->real_escape_string($body);
   $body = htmlentities($body);
-  
+  $mysqli = connect();
+  $body = $mysqli->real_escape_string($body);
   return $body;
 }
 
 /* Adds the user to the name table. If the user exists, it will update the entry. */
 function set_name($from, $name){
-  $result = query("SELECT * FROM name WHERE from = '$from' LIMIT 1");
-  if($result->num_rows > 0) {
-    query("UPDATE name SET name = '$name' WHERE from = '$from'");
+  $result = query("SELECT * FROM name WHERE `from` = '$from' LIMIT 1");
+  $row = $result->fetch_assoc();
+  if($row['user'] == $name) {
+    query("UPDATE name SET user = '$name' WHERE from = '$from'");
   } else {
-    query("INSERT INTO name (name, from) VALUES ('$name', '$from')");
+    query("INSERT INTO name (`user`, `from`) VALUES ('$name', '$from')");
   }
 }
 
@@ -45,4 +45,18 @@ function add_text($text, $from){
   query("INSERT INTO texts (text, number, timestamp) VALUES ('$text', '$from', '$time')");
 }
 
+/* Does a name for the given number exist? */
+function name_exists($from){
+  $q = query("SELECT * FROM name WHERE `from` = '$from' LIMIT 1");
+  $row = $q->fetch_assoc();
+  if($row['from'] == $from) return true;
+  else return false;
+}
+
+/* Get the name associated with the given number */
+function get_name($from){
+  $q = query("SELECT * FROM name WHERE `from` = '$from' LIMIT 1");
+  $row = $q->fetch_assoc();
+  return $row['user'];
+}
 ?>

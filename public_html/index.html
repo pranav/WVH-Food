@@ -18,9 +18,13 @@
         $.getJSON('/api.php?getlatest',
           function(data){            
             if(data.recent == "true"){
+              var name = "";
+              if(data.hasName == "true"){
+                name = " by "+data.name;
+              }
               $("#answer").text(data.room);
               $("#answer").css("color", "green");
-              $(".posted").text("posted "+getTime(parseInt(data.time))+" minutes ago");
+              $(".posted").text("posted "+getTime(parseInt(data.time))+" minutes ago"+name);
             }
             else {
               $("#answer").text("NOPE."); 
@@ -54,17 +58,21 @@
     </div>
   </div>
   <div class="row">
-    <div class="span4">
+    <div class="span3">
       <h1>What is this?</h1>
       <p>This is a little service I created to notify users when there is free food available in WVH.</p>
     </div>
-    <div class="span4">
+    <div class="span3">
       <h1>How do I use?</h1>
       <p>Just text <strong>(617) 544-3984</strong> the location of where the free food is, the app will take care of the rest.</p>
     </div>
-    <div class="span4">
+    <div class="span3">
       <h1>Accuracy rate?</h1>
       <p>This app will simply report on the latest sent in text from the past hour.</p>
+    </div>
+    <div class="span3">
+      <h1>Trust me</h1>
+      <p>Do you want to become a trusted submitter? Just text <strong>(617) 544-3984</strong>: REG YourName.</p>
     </div>
   </div>
 </div>

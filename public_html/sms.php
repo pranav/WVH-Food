@@ -4,7 +4,7 @@ require_once('../lib.php');
 
 /* If the text contains a "REG ", register the user */
 if(substr($_POST['Body'], 0, 4) == "REG "){
-  $name = substr($_POST['Body'],5);
+  $name = substr($_POST['Body'], 4);
   set_name(sanitize($_POST['From']), sanitize($name));
 } 
 
