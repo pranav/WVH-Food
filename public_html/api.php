@@ -13,9 +13,10 @@ if(isset($_GET['getlatest'])){
     $name = get_name($row['number']);
     $hasName = "true";
   }
+  $text = addslashes(html_entity_decode($row['text']));
   echo <<<json
     {
-      "room":"{$row['text']}",
+      "room":"$text",
       "recent":"$recent",
       "time":"{$row['timestamp']}", 
       "hasName":"$hasName",
