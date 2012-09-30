@@ -9,7 +9,7 @@ if(isset($_GET['getlatest'])){
   $name = "";
   $hasName = "false";
   if((time() - $row['timestamp']) < 3600) $recent = "true";
-  if(name_exists($row['number'])){ 
+  if(name_exists($row['number'])){
     $name = get_name($row['number']);
     $hasName = "true";
   }
@@ -18,10 +18,10 @@ if(isset($_GET['getlatest'])){
     {
       "room":"$text",
       "recent":"$recent",
-      "time":"{$row['timestamp']}", 
+      "time":"{$row['timestamp']}",
       "hasName":"$hasName",
       "name":"$name"
-    }  
+    }
 json;
 }
 ?>
